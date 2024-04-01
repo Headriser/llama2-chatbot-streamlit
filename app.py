@@ -2,10 +2,10 @@ import streamlit as st
 import replicate
 import os
 
-# App title
+# Название приложения
 st.set_page_config(page_title="Llama 2 Чат-бот")
 
-# Replicate Credentials
+# Токен и сайдбар
 with st.sidebar:   
     st.title('Чат-бот')
     if 'REPLICATE_API_TOKEN' in st.secrets:
@@ -27,7 +27,7 @@ with st.sidebar:
         llm = 'a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5'
     temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.1, step=0.01)
     top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
-    max_length = st.sidebar.slider('max_length', min_value=32, max_value=1024, value=120, step=8)
+    max_length = st.sidebar.slider('max_length', min_value=32, max_value=128, value=120, step=8)
     
 
 if "messages" not in st.session_state.keys():
@@ -42,7 +42,7 @@ def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Чем я могу помочь?"}]
 st.sidebar.button('Очистить историю сообщений', on_click=clear_chat_history)
 
-# Функция для ответов Refactored from https://github.com/a16z-infra/llama2-chatbot
+# Функция для ответов https://github.com/a16z-infra/llama2-chatbot
 def generate_llama2_response(prompt_input):
     string_dialogue = "You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'."
     for dict_message in st.session_state.messages:
