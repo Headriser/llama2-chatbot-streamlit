@@ -1,1 +1,1 @@
-Чат-бот можно проверить работоспособность по ссылке: https://chatbotllama.streamlit.app/
+Чат-бот можно проверить работоспособность по ссылке: https://llamachatbotxd.streamlit.app/
